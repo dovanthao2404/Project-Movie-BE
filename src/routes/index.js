@@ -7,5 +7,6 @@ const rootRouter = Router();
 
 rootRouter.use("/auth", authRoutes);
 rootRouter.use("/movies", movieRouter);
+rootRouter.use("/users", userRouter);
 
 module.exports = { rootRouter };

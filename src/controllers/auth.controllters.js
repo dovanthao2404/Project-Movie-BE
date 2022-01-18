@@ -1,7 +1,8 @@
 const { User } = require("../models");
 const slug = require('slug');
-const { response } = require("express");
-
+const bcrypt = require("bcrypt");
+const { configEnv } = require("../config/server.config");
+const jwt = require("jsonwebtoken");
 const register = async (req, res) => {
     try {
         const {
@@ -9,16 +10,17 @@ const register = async (req, res) => {
             phoneNumber,
             email,
             password,
-            avatar,
             dateOfBirth,
         } = req.body;
         const alias = slug(name);
+
+        const salt = bcrypt.genSaltSync(10);
+        const hashPassword = bcrypt.hashSync(password, salt);
         const userRegister = await User.create({
             name,
             phoneNumber,
             email,
-            password,
-            avatar,
+            password: hashPassword,
             dateOfBirth,
             alias
         });
@@ -29,9 +31,49 @@ const register = async (req, res) => {
     }
 };
 
-const imageUpload = (req, res) => {
-    const { resultImage } = req;
-    res.send(resultImage);
+
+const login = async (req, res) => {
+    try {
+        const {
+            email,
+            password,
+        } = req.body;
+
+        const userLogin = await User.findOne({ where: { email } });
+        if (!userLogin) {
+            res.status(404).send({ message: "Email does not exist!" });
+        } else {
+            const isAuth = bcrypt.compareSync(password, userLogin.password);
+            if (isAuth) {
+                const payload = {
+                    id: userLogin.id,
+                    email: userLogin.email,
+                    roles: userLogin.roles,
+                };
+                const secretKey = configEnv.server.secretKey;
+                const token = jwt.sign(payload, secretKey,);
+
+                res.status(200).send({
+                    messages: "Logged in successfully",
+                    token,
+                    info: {
+                        id: userLogin.id,
+                        avatar: userLogin.avatar,
+                        name: userLogin.name,
+                        roles: userLogin.roles
+                    },
+                });
+            } else {
+                res.status(400).send({
+                    messages: "Incorrect password",
+                });
+            }
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
 };
 
-module.exports = { register, imageUpload };
+module.exports = { register, login };
