@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { register, imageUpload } = require("../controllers/auth.controllters");
 const { uploadImage } = require("../controllers/upload.controllers");
-const { uploadImageSingle } = require("../middlewares/validations/upload-image.middleware");
+const { uploadImageSingle } = require("../middlewares/uploads/upload-image.middleware");
 
 const authRoutes = Router();
 
