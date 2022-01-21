@@ -1,11 +1,12 @@
 const { Router } = require("express");
-const { register, login } = require("../controllers/auth.controllters");
-const { uploadImage } = require("../controllers/upload.controllers");
-const { uploadImageSingle } = require("../middlewares/uploads/upload-image.middleware");
-
+const { User } = require("../models");
+const { register, login, resetPassword } = require("../controllers/auth.controllters");
+const { checkExist } = require("../middlewares/validations/check-exist.middlewares");
+const { sendMail } = require("../services/send-mail.services");
 const authRoutes = Router();
 
 authRoutes.post("/register", register);
 authRoutes.post("/login", login);
+authRoutes.post("/reset-password", checkExist(User, "email"), sendMail, resetPassword);
 
 module.exports = { authRoutes };

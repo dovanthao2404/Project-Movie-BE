@@ -19,7 +19,7 @@ const authenticate = (req, res, next) => {
 
 const authorize = (arrayRole) => (req, res, next) => {
     const { user } = req;
-    if (arrayRole.includes(user.role)) {
+    if (arrayRole.includes(user.roles)) {
         next();
     } else {
         res.status(403).send({

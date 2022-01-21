@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, CodeResetPassword } = require("../models");
 const slug = require('slug');
 const bcrypt = require("bcrypt");
 const { configEnv } = require("../config/server.config");
@@ -24,6 +24,8 @@ const register = async (req, res) => {
             dateOfBirth,
             alias
         });
+        await CodeResetPassword.create({ code: "", userId: userRegister.id });
+
 
         res.status(200).send(userRegister);
     } catch (error) {
@@ -71,9 +73,31 @@ const login = async (req, res) => {
         }
     }
     catch (error) {
-        console.log(error);
         res.status(500).send(error);
     }
 };
 
-module.exports = { register, login };
+
+const resetPassword = async (req, res) => {
+    try {
+
+        const detail = await User.findOne({
+            where: {
+                email: req.body.email,
+            },
+        });
+
+        const salt = bcrypt.genSaltSync(10);
+        const hashPassword = bcrypt.hashSync(req.password, salt);
+        await detail.update({
+            password: hashPassword,
+        });
+
+
+        res.status(200).send({ message: "Sent the new password, please check email" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+};
+module.exports = { register, login, resetPassword };
