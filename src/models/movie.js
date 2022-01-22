@@ -20,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Movie.init({
     name: DataTypes.STRING,
-    poster: DataTypes.STRING,
+    poster: {
+      type: DataTypes.STRING,
+      defaultValue: ""
+    },
     alias: DataTypes.STRING,
     trailer: DataTypes.STRING,
     description: DataTypes.TEXT,
-    cinemaId: DataTypes.INTEGER,
     isHot: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

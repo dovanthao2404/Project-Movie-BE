@@ -1,6 +1,6 @@
-const checkExist = (Model, type) => async (req, res, next) => {
+const checkExist = (Model, type, typeValue) => async (req, res, next) => {
   try {
-    const valueCheck = req.body[type];
+    const valueCheck = req.body[typeValue || type];
     const id = req.params.id;
     const detail = await Model.findOne({
       where: {
@@ -11,7 +11,7 @@ const checkExist = (Model, type) => async (req, res, next) => {
       next();
     } else {
       res.status(404).send({
-        messages: `${type || "id"} does not exist`,
+        messages: `${typeValue || type || "id"} does not exist`,
       });
     }
   } catch (error) {
