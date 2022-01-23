@@ -6,6 +6,7 @@ const { cineplexRouter } = require("./cineplex.routes");
 const { bannerRouter } = require("./banner.routes");
 const { roomRouter } = require("./room.routes");
 const { cinemaRouter } = require("./cinema.routes");
+const { commentRouter } = require("./comment.routes");
 const rootRouter = Router();
 
 rootRouter.use("/auth", authRoutes);
@@ -15,6 +16,8 @@ rootRouter.use("/cineplex", cineplexRouter);
 rootRouter.use("/banner", bannerRouter);
 rootRouter.use("/cinemas", cinemaRouter);
 rootRouter.use("/rooms", roomRouter);
+rootRouter.use("/comments", commentRouter);
+
 
 
 
