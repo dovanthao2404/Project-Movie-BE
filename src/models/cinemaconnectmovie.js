@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Cinema, {
         foreignKey: "cinemaId"
       });
+
     }
   }
   CinemaConnectMovie.init({

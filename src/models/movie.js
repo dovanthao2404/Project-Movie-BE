@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Comment, {
         foreignKey: "movieId",
       });
-      Movie.belongsToMany(models.Cinema, { through: 'CinemaConnectMovie' });
+      this.hasMany(models.CinemaConnectMovie, {
+        foreignKey: "movieId",
+      });
 
     }
   }

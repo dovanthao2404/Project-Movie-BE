@@ -1,4 +1,4 @@
-const { Showtime, Seat, Ticket } = require("../models");
+const { Showtime, Seat, Ticket, Cinema, Room, CinemaConnectMovie } = require("../models");
 
 const checkTypeSeat = (name, priceNormal, priceVip) => {
 
@@ -21,6 +21,15 @@ const createShowtime = async (req, res) => {
             movieShowtime,
             movieId
         });
+
+        const room = await Room.findOne({
+            where: {
+                id: roomId
+            },
+        });
+        const cinemaId = room.dataValues.cinemaId;
+        const movieConnect = await CinemaConnectMovie.create({ cinemaId, movieId });
+
         let i = 1;
 
         const a = Array.from(Array(160), () => i++);
@@ -36,8 +45,9 @@ const createShowtime = async (req, res) => {
         }
 
 
-        res.status(201).send({ message: "create successfully", });
+        res.status(201).send({ message: "create successfully" });
     } catch (error) {
+
         res.status(500).send(error);
     }
 };
@@ -99,7 +109,7 @@ const ticketBooking = async (req, res) => {
     try {
         const { listIdSeat, userId, movieId, movieShowtime, movieName, linkPoster } = req.body;
 
-        console.log(listIdSeat, userId, movieId, movieShowtime, movieName, linkPoster);
+
 
         for (let i = 0; i < listIdSeat.length; i++) {
             const seat = await Seat.findByPk(listIdSeat[i]);
@@ -129,7 +139,7 @@ const ticketBooking = async (req, res) => {
 
         res.send({ message: "success", ticket });
     } catch (error) {
-        console.log(error);
+
         res.status(500).send(error);
     }
 };

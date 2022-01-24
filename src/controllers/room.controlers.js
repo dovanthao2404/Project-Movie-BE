@@ -52,4 +52,21 @@ const deleteRoom = async (req, res) => {
 };
 
 
-module.exports = { createRoom, updateRoom, deleteRoom };
+const getShowtimeByRoom = async (req, res) => {
+
+    try {
+        const { id } = req.params;
+        const room = await Room.findOne({
+            where: {
+                id
+            },
+            include: Showtime
+        });
+        res.send(room);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+
+module.exports = { createRoom, updateRoom, deleteRoom, getShowtimeByRoom };
