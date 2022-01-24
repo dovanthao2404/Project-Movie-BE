@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT
     },
     ticketId: DataTypes.INTEGER,
-    showtimeId: DataTypes.INTEGER
+    showtimeId: DataTypes.INTEGER,
+    isPlaced: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Seat',

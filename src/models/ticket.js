@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init({
     userId: DataTypes.INTEGER,
     movieId: DataTypes.INTEGER,
-    movieShowTime: DataTypes.DATE,
+    movieShowtime: DataTypes.DATE,
     movieName: DataTypes.STRING,
     linkPoster: {
       type: DataTypes.STRING,

@@ -5,7 +5,7 @@ const { checkExist } = require("../middlewares/validations/check-exist.middlewar
 const { sendMail } = require("../services/send-mail.services");
 const authRoutes = Router();
 
-authRoutes.post("/register", checkExist(User, "email"), register);
+authRoutes.post("/register", register);
 authRoutes.post("/login", login);
 authRoutes.post("/reset-password", checkExist(User, "email"), sendMail, resetPassword);
 

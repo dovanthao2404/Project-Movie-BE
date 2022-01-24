@@ -7,6 +7,7 @@ const { bannerRouter } = require("./banner.routes");
 const { roomRouter } = require("./room.routes");
 const { cinemaRouter } = require("./cinema.routes");
 const { commentRouter } = require("./comment.routes");
+const { showtimeRouter } = require("./showtime.routes");
 const rootRouter = Router();
 
 rootRouter.use("/auth", authRoutes);
@@ -17,8 +18,7 @@ rootRouter.use("/banner", bannerRouter);
 rootRouter.use("/cinemas", cinemaRouter);
 rootRouter.use("/rooms", roomRouter);
 rootRouter.use("/comments", commentRouter);
-
-
+rootRouter.use("/showtimes", showtimeRouter);
 
 
 module.exports = { rootRouter };

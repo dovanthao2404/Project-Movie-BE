@@ -23,7 +23,7 @@ module.exports = {
       },
       ticketId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       showtimeId: {
         type: Sequelize.INTEGER,
