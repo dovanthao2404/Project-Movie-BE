@@ -1,6 +1,8 @@
 
 const { Movie, Cinema, CinemaConnectMovie, Comment } = require("../models");
 const slug = require("slug");
+const { Op } = require("sequelize");
+
 const createMovie = async (req, res) => {
     try {
         const { name, trailer, description, isHot, isNowShowing } = req.body;
@@ -32,7 +34,7 @@ const updateMovie = async (req, res) => {
         });
         res.status(200).send({ message: "update successfully" });
     } catch (error) {
-        console.log(error);
+
         res.status(500).send(error);
     }
 };
@@ -62,8 +64,83 @@ const removeMovie = async (req, res) => {
             res.status(400).send({ message: "delete successfully" });
         }
     } catch (error) {
-
+        res.status(500).send(error);
     }
 };
 
-module.exports = { createMovie, updateMovie, removeMovie };
+const getListMovie = async (req, res) => {
+    try {
+        const listMovie = await Movie.findAll();
+        res.send(listMovie);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const getListComment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const listMovie = await Movie.findOne({
+            where: {
+                id
+            },
+            include: [Comment]
+        });
+        res.send(listMovie);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const searchMovie = async (req, res) => {
+    try {
+        const { keyword } = req.query;
+        const listMovie = await Movie.findAll(
+            {
+                where: {
+                    name: {
+                        [Op.substring]: keyword
+                    }
+                }
+            }
+        );
+
+        res.send(listMovie);
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const uploadPoster = async (req, res) => {
+    try {
+        const { resultImage } = req;
+        const { id } = req.params;
+        await Movie.update(
+            { poster: resultImage.url },
+            { where: { id } }
+        );
+        res.status(201).send({ message: "upload poster successfully" });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const moviePagination = async (req, res) => {
+    try {
+        const { pageSize, pageCurrent } = req.query;
+
+        const { count, rows } = await Movie.findAndCountAll({
+            offset: (+pageCurrent - 1) * pageSize,
+            limit: +pageSize
+        });
+        const totalPage = Math.ceil(count / pageSize);
+
+        res.send({ totalPage, rows });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+module.exports = { createMovie, updateMovie, removeMovie, getListMovie, getListComment, searchMovie, uploadPoster, moviePagination };

@@ -262,9 +262,7 @@ const getUserPagination = async (req, res) => {
         res.send({ totalPage, rows });
 
     } catch (error) {
-        console.log(totalItem);
         res.status(500).send(error);
-
     }
 };
 
