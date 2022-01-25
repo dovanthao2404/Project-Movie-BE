@@ -1,6 +1,6 @@
 const slug = require('slug');
 
-const { Cineplex, sequelize, Cinema } = require("../models");
+const { Cineplex, sequelize, Cinema, Room, Showtime } = require("../models");
 
 
 const getAllCineplex = async (req, res) => {
@@ -71,4 +71,57 @@ const deleteCineplex = async (req, res) => {
     }
 };
 
-module.exports = { getAllCineplex, createCineplex, updateCineplex, deleteCineplex };
+
+const getCinemaByCineplex = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const cineplex = await Cineplex.findOne({
+            where: {
+                id
+            },
+            include: [Cinema]
+        });
+        res.send(cineplex);
+    } catch (error) {
+        res.status(500).send(req);
+    }
+};
+
+
+const getCineplexById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const cineplex = await Cineplex.findOne({
+            where: {
+                id
+            },
+            include: [{
+                model: Cinema,
+                include: [{
+                    model: Room,
+                    include: [Showtime]
+                }]
+            }]
+        });
+        res.send(cineplex);
+    } catch (error) {
+        res.status(500).send(req);
+    }
+};
+
+const uploadLogo = async (req, res) => {
+    try {
+        const { resultImage } = req;
+        const { id } = req.params;
+        await Cineplex.update(
+            { logo: resultImage.url },
+            { where: { id } }
+        );
+        res.status(201).send({ message: "upload logo successfully" });
+
+    } catch (error) {
+        res.status(500).send(req);
+    }
+};
+
+module.exports = { getAllCineplex, createCineplex, updateCineplex, deleteCineplex, getCinemaByCineplex, getCineplexById, uploadLogo };

@@ -1,4 +1,4 @@
-const { Cinema, Room, CinemaConnectMovie } = require("../models");
+const { Cinema, Room, CinemaConnectMovie, Movie, sequelize } = require("../models");
 const slug = require("slug");
 const createCinema = async (req, res) => {
 
@@ -64,9 +64,92 @@ const deleteCinema = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.status(500).send(error);
     }
 };
 
-module.exports = { createCinema, updateCinema, deleteCinema };
+const getCinemaDetail = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const cinema = await Cinema.findOne({
+            where: {
+                id
+            },
+            include: [Room]
+        });
+
+        const results = await sequelize.query(`
+            SELECT Movies.id,name,poster,alias,description,isHot,isNowShowing,Movies.createdAt,Movies.updatedAt FROM CinemaConnectMovies
+            Right JOIN Movies ON Movies.id = CinemaConnectMovies.movieId
+            where cinemaId = ${id};
+        `);
+
+        const listMovie = results[0];
+
+        cinema.dataValues.Movies = listMovie;
+
+        res.send(cinema);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const getRoomByCinema = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const cinema = await Cinema.findOne({
+            where: {
+                id
+            },
+            include: [Room]
+        });
+        res.send(cinema);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+
+const getMovieByCinema = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const cinema = await Cinema.findOne({
+            where: {
+                id
+            },
+        });
+
+
+        const results = await sequelize.query(`
+            SELECT Movies.id,name,poster,alias,description,isHot,isNowShowing,Movies.createdAt,Movies.updatedAt FROM CinemaConnectMovies
+            Right JOIN Movies ON Movies.id = CinemaConnectMovies.movieId
+            where cinemaId = ${id};
+        `);
+
+        const listMovie = results[0];
+
+        cinema.dataValues.Movies = listMovie;
+
+        res.send(cinema);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+const uploadLogo = async (req, res) => {
+    try {
+        const { resultImage } = req;
+        const { id } = req.params;
+        await Cinema.update(
+            { logo: resultImage.url },
+            { where: { id } }
+        );
+        res.status(201).send({ message: "upload logo successfully" });
+    } catch (error) {
+        res.status(500).send(error);
+
+    }
+};
+
+
+module.exports = { createCinema, updateCinema, deleteCinema, getCinemaDetail, getRoomByCinema, getMovieByCinema, uploadLogo };

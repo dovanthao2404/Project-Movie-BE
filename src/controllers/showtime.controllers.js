@@ -28,7 +28,13 @@ const createShowtime = async (req, res) => {
             },
         });
         const cinemaId = room.dataValues.cinemaId;
-        const movieConnect = await CinemaConnectMovie.create({ cinemaId, movieId });
+        const movieConnectCinema = await CinemaConnectMovie.findOne({
+            where: { cinemaId, movieId }
+        });
+        console.log(movieConnectCinema);
+        if (!movieConnectCinema) {
+            const movieConnect = await CinemaConnectMovie.create({ cinemaId, movieId });
+        }
 
         let i = 1;
 
