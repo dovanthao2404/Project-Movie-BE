@@ -1,5 +1,5 @@
 
-const { Movie, Cinema, CinemaConnectMovie, Comment } = require("../models");
+const { Movie, Cinema, CinemaConnectMovie, Comment, Showtime, Room } = require("../models");
 const slug = require("slug");
 const { Op } = require("sequelize");
 
@@ -143,4 +143,53 @@ const moviePagination = async (req, res) => {
     }
 };
 
-module.exports = { createMovie, updateMovie, removeMovie, getListMovie, getListComment, searchMovie, uploadPoster, moviePagination };
+const getDetailMovie = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const movieDetail = await Movie.findOne({
+            where: {
+                id
+            },
+            include: [
+                Comment
+            ]
+        });
+
+        const listCineConnect = await CinemaConnectMovie.findAll({
+            where: {
+                movieId: id
+            },
+            attributes: ["cinemaId"]
+        });
+
+        let results = [];
+        for (let i = 0; i < listCineConnect.length; i++) {
+            console.log(listCineConnect[i].dataValues.cinemaId);
+            const result = await Cinema.findOne({
+                where: {
+                    id: listCineConnect[i].dataValues.cinemaId
+                },
+                include: [
+                    {
+                        model: Room,
+                        include: {
+                            model: Showtime,
+                            where: { movieId: id }
+                        }
+                    }
+                ]
+            });
+            results.push(result);
+        }
+
+        movieDetail.dataValues.listShowtime = results;
+
+        res.send(movieDetail);
+
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+module.exports = { createMovie, updateMovie, removeMovie, getListMovie, getListComment, searchMovie, uploadPoster, moviePagination, getDetailMovie };
