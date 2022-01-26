@@ -1,6 +1,6 @@
 const { User, CodeResetPassword } = require("../models");
 const slug = require('slug');
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { configEnv } = require("../config/server.config");
 const jwt = require("jsonwebtoken");
 const register = async (req, res) => {

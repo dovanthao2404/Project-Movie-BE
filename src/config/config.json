@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "movie",
-    "database": "movie-be",
-    "host": "127.0.0.1",
+    "username": "umvc8e0aadermeqn",
+    "password": "X1S7AUa11WUjDNT2aNxu",
+    "database": "bbxmxtc2cvr8jqdfnasr",
+    "host": "bbxmxtc2cvr8jqdfnasr-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   },
   "test": {
@@ -15,9 +15,9 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "movie",
+    "database": "movie-be",
+    "host": "mysqldb",
     "dialect": "mysql"
   }
 }

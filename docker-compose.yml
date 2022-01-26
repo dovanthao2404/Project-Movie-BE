@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=movie-be
+      - MYSQL_DATABASE=movie
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysqldb:/var/lib/mysql
+    networks:
+      - node19-movie
+  app:
+    depends_on:
+      - mysqldb
+    build: .
+    image: node19-express-movie
+    container_name: node19-express-movie
+    env_file: .env
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=mysqldb
+      - DB_PORT=8080
+      - MYSQL_DATABASE=movie
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=movie-be
+      - MYSQL_ROOT_PASSWORD=movie-be
+      - DB_ROOT_PASSWORD=movie-be
+      - DB_NAME=movie
+      - DB_ROOT_USER=root
+      - DB_DIALECT=mysql
+      - SECRET_KEY=be-movie
+      - CLOUDINARY_USER_NAME=dzkp4wigv
+      - CLOUDINARY_API_KEY=273191544515999
+      - CLOUDINARY_API_SECRET=8F3Y73k6JevMjxMFnvnWEThf8Lc
+    networks:
+      - node19-movie
+
+volumes:
+  mysqldb:
+    driver: local
+
+networks:
+  node19-movie:
+    driver: bridge
