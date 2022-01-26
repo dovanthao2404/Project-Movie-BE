@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "movie",
-    "database": "movie-be",
-    "host": "mysqldb",
+    "username": "umvc8e0aadermeqn",
+    "password": "X1S7AUa11WUjDNT2aNxu",
+    "database": "bbxmxtc2cvr8jqdfnasr",
+    "host": "bbxmxtc2cvr8jqdfnasr-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   }
 }
