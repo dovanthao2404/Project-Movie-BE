@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: ""
     },
     alias: DataTypes.STRING,
+    address: DataTypes.STRING,
     cineplexId: DataTypes.INTEGER
   }, {
     sequelize,
