@@ -3,10 +3,10 @@ const slug = require("slug");
 const createCinema = async (req, res) => {
 
     try {
-        const { name, cineplexId } = req.body;
+        const { name, cineplexId, address } = req.body;
         const alias = slug(name);
         const newRoom = await Cinema.create({
-            name, cineplexId, alias
+            name, cineplexId, alias, address
         });
 
         res.status(200).send({ message: "create success", cinema: newRoom });
