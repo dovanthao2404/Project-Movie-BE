@@ -1,4 +1,4 @@
-const { User, CodeResetPassword } = require("../models");
+const { User } = require("../models");
 const slug = require('slug');
 const bcrypt = require("bcryptjs");
 const { configEnv } = require("../config/server.config");
@@ -24,7 +24,6 @@ const register = async (req, res) => {
             dateOfBirth,
             alias
         });
-        await CodeResetPassword.create({ code: "", userId: userRegister.id });
 
 
         res.status(200).send(userRegister);
