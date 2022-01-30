@@ -117,14 +117,6 @@ const ticketBooking = async (req, res) => {
 
 
 
-        for (let i = 0; i < listIdSeat.length; i++) {
-            const seat = await Seat.findByPk(listIdSeat[i]);
-            await seat.update({
-                isPlaced: true
-            });
-
-        }
-
         const ticketNew = await Ticket.create({
             userId,
             movieId,
@@ -133,6 +125,17 @@ const ticketBooking = async (req, res) => {
             linkPoster
         });
         const ticket = { ...ticketNew.dataValues };
+
+
+
+        for (let i = 0; i < listIdSeat.length; i++) {
+            const seat = await Seat.findByPk(listIdSeat[i]);
+            await seat.update({
+                isPlaced: true,
+                ticketId: ticketNew.dataValues.id
+            });
+        }
+
 
         const listSeat = await Seat.findAll({
             where: {
