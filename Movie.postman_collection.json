@@ -1,0 +1,1152 @@
+{
+	"info": {
+		"_postman_id": "4f0e8255-e3d5-4b57-8a60-a58130e2f1e8",
+		"name": "Movie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Đỗ Văn Thảo\",\r\n    \"phoneNumber\": \"0922222222\",\r\n    \"email\": \"dovanthao.developer@gmail.com\",\r\n    \"password\": \"dovanthao\",\r\n    \"avatar\": \"\",\r\n    \"dateOfBirth\": \"2020-11-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dovanthao2404@gmail.com\",\r\n    \"password\": \"dovanthao\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "reset pasword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dovanthao2404@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/auth/reset-password"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserManagement",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"phoneNumber\": \"0922222222\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin1234\",\r\n    \"avatar\": \"\",\r\n    \"dateOfBirth\": \"2020-11-01\",\r\n    \"roles\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "UploadAvatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Pictures/img-cartoon-slide/png-transparent-captain-america-iron-man-spider-man-cartoon-chibi-captain-america-captain-america-illustration-comics-avengers-heroes-thumbnail.png"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/users/upload-avatar"
+					},
+					"response": []
+				},
+				{
+					"name": "Get list user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "UploadAvatar Amin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Downloads/avatar-dovanthao.jpg"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/users/upload-avatar/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Get my info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/users/my-info"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Thảo fake\",\r\n    \"phoneNumber\": \"011232323\",\r\n    \"dateOfBirth\": \"2022-1-1\",\r\n    \"roles\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/users/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Update MY Info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"phoneNumber\": \"0921323323\",\r\n    \"dateOfBirth\": \"2022-1-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Search User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/v1/users/search?keyword=admin",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/v1/users/pagination?pageCurrent=1&pageSize=10",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"pagination"
+							],
+							"query": [
+								{
+									"key": "pageCurrent",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CinemaManagement",
+			"item": [
+				{
+					"name": "Create Cinema",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BHD QUẬN 2\",\r\n    \"cineplexId\": 2,\r\n    \"address\": \"22/10/2 ai bieets\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/cinemas"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cinema",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BHD Quận 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/cinemas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cinema",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/cinemas/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Cinema",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cinemas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Room By Cinema Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cinemas/room/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie By Cinema Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cinemas/movie/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload logo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Downloads/Rap-BHD-Star-Cineplex-ICON-68.jpg"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/cinemas/upload-logo/6"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Banner",
+			"item": [
+				{
+					"name": "Create banner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Pictures/slide/6084669.jpg"
+								},
+								{
+									"key": "trailer",
+									"value": "https://youtube.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/banner/"
+					},
+					"response": []
+				},
+				{
+					"name": "UPdate banner",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Pictures/slide/giphy.gif"
+								},
+								{
+									"key": "trailer",
+									"value": "https://www.youtube.com/watch?v=rt-2cxAiPJk",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/banner/2"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll banner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/banner"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Banner",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/banner/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CineplexManagement",
+			"item": [
+				{
+					"name": "Create Cineplex",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BHD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/cineplex/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cineplex",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BHD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/cineplex/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cineplex",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/cineplex/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Getlist Cineplex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cineplex/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cinema By cineplexId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cineplex/cinema/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cineplex By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/cineplex/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload logo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/dovanthao/Downloads/BHDStar_Logo_Tron.png"
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/cineplex/upload-logo/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "Create Room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Phòng 1\",\r\n    \"cinemaId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/rooms/"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Room Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"hohohooh oho\",\r\n    \"cinemaId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/rooms/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/v1/rooms/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rooms",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "{{token}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get showtime by room id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/rooms/7"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie Management",
+			"item": [
+				{
+					"name": "Create Movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tows yeu cau\",\r\n    \"trailer\": \"Trailer\",\r\n    \"description\": \"Hi\",\r\n    \"isHot\": true,\r\n    \"isNowShowing\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/movies/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Phim ra hay\",\r\n    \"trailer\": \"Trailer\",\r\n    \"description\": \"Hi\",\r\n    \"isHot\": true,\r\n    \"isNowShowing\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/movies/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/movies/2"
+					},
+					"response": []
+				},
+				{
+					"name": "List Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/movies/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get list comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/movies/comment/25"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v1/movies/search/?keyword=hello",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "hello"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Poster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": "{{domain}}/api/v1/movies/upload-poster/26"
+					},
+					"response": []
+				},
+				{
+					"name": "Movie Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v1/movies/pagination?pageSize=10&pageCurrent=1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"pagination"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageCurrent",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/v1/movies/6"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Create Comments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 4,\r\n    \"movieId\": 1,\r\n    \"content\": \"to yeu cau\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "Updatte Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"to cx yeu cau nhieu lam\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/comments/2"
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/comments/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Showtime",
+			"item": [
+				{
+					"name": "Create Showtime",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movieId\":1, \r\n    \"roomId\":2,\r\n    \"movieShowtime\": \"2022-01-23 02:12:59\",\r\n    \"movieName\": \"Hihi\",\r\n    \"priceNormal\": 70000,\r\n    \"priceVip\": 50000 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/showtimes/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Showtime",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movieShowtime\": \"2018-01-01T08:00:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/showtimes/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/v1/showtimes/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"showtimes",
+								"1"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ticket Room",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{domain}}/api/v1/showtimes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Ticket Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listIdSeat\": [1,2,3],\r\n    \"userId\": 1,\r\n    \"movieId\":1,\r\n    \"movieShowtime\":\"2022-01-23 10:02:54\",\r\n    \"movieName\": \"Phim hay\",\r\n    \"linkPoster\": \"https://\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/v1/showtimes/ticket-booking"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlcyI6IkFETUlOIiwiaWF0IjoxNjQzNTUxMDI4fQ._8GES6loO6ZkzL1Nrhd1xh3VW8lbBS1FRyzFJyEEXAg",
+			"type": "string"
+		},
+		{
+			"key": "domain",
+			"value": "localhost:8000",
+			"type": "string"
+		}
+	]
+}
