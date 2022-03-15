@@ -54,14 +54,14 @@ const removeMovie = async (req, res) => {
         });
         if (listComment.length || listCineConnectMovie.length) {
             res.status(400).send({ message: "can not delete" });
-
+            return;
         } else {
             await Movie.destroy({
                 where: {
                     id
                 }
             });
-            res.status(400).send({ message: "delete successfully" });
+            res.status(200).send({ message: "delete successfully" });
         }
     } catch (error) {
         res.status(500).send(error);
