@@ -12,6 +12,7 @@ const uploadImageSingle = () => {
         fileFilter: (req, file, cb) => {
             const extensionImageList = ["png", "jpg", "jpeg", "gif", "webp"];
             const extensionFile = getExtensionFile(file.originalname);
+            console.log(file.originalname);
             if (extensionImageList.includes(extensionFile)) {
                 cb(null, true);
             } else {

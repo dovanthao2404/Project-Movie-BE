@@ -11,7 +11,7 @@ movieRouter.post("/", authenticate, authorize(["ADMIN"]), createMovie);
 movieRouter.get("/", getListMovie);
 movieRouter.get("/search", searchMovie);
 movieRouter.get("/pagination", moviePagination);
-movieRouter.post("/upload-poster/:id", authenticate, authorize(["ADMIN"]), checkExist(Movie), checkExist(Movie), uploadImageSingle().single("image"), uploadImage("Poster"), uploadPoster);
+movieRouter.post("/upload-poster/:id", authenticate, authorize(["ADMIN"]), checkExist(Movie), uploadImageSingle().single("image"), uploadImage("Poster"), uploadPoster);
 movieRouter.get("/:id", checkExist(Movie), getDetailMovie);
 movieRouter.put("/:id", authenticate, authorize(["ADMIN"]), checkExist(Movie), updateMovie);
 movieRouter.delete("/:id", authenticate, authorize(["ADMIN"]), checkExist(Movie), removeMovie);
