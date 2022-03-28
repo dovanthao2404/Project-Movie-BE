@@ -13,14 +13,16 @@ module.exports = {
         'Movies',
         'movieDuration',
         {
-          type: Sequelize.STRING
+          type: Sequelize.FLOAT,
+          allowNull: false
         }
       ),
       queryInterface.addColumn(
         'Movies',
         'movieClassification',
         {
-          type: Sequelize.STRING
+          type: Sequelize.INTEGER,
+          allowNull: false
         }
       ),
     ]);

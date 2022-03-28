@@ -37,6 +37,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    movieDuration: {
+      type: DataTypes.FLOAT
+    },
+    movieClassification: {
+      type: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Movie',
