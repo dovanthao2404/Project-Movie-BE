@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 const createMovie = async (req, res) => {
     try {
-        const { name, trailer, description, isHot, isNowShowing, movieDuration } = req.body;
+        const { name, trailer, description, isHot, isNowShowing, movieDuration, movieClassification } = req.body;
         const alias = slug(name);
         const newMovie = await Movie.create({
             name,
@@ -13,7 +13,7 @@ const createMovie = async (req, res) => {
             trailer,
             description,
             isHot,
-            isNowShowing, movieDuration
+            isNowShowing, movieDuration, movieClassification
         });
 
         res.status(201).send({ message: "create successfully", movie: newMovie });
